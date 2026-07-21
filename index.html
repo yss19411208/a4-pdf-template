@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Markdown教材をA4縦PDFへ変換するための視覚デザイン仕様。用紙、余白、配色、見出し、表、囲み枠、図、ページ密度を定義します。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>A4教材PDFテンプレート｜視覚仕様</title>
+  <style>
+    :root{
+      --navy:#1A237E;--blue:#1565C0;--orange:#FF6F00;--red:#C0392B;
+      --green:#2E7D32;--purple:#6A1B9A;--text:#2C2C2C;
+      --pale-blue:#E3F2FD;--pale-red:#FDECEA;--pale-green:#E8F5E9;
+      --pale-yellow:#FFF8E1;--pale-gray:#F5F5F5;--line:#BDBDBD;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#fff;color:var(--text);font-family:"Noto Sans JP","Noto Sans CJK JP","Yu Gothic",Meiryo,sans-serif;line-height:1.75}
+    main{max-width:1040px;margin:0 auto;padding:28px 22px 80px}
+    .hero{background:var(--navy);color:#fff;border-radius:14px;padding:42px 42px 34px;border-bottom:6px solid var(--orange)}
+    .hero h1{margin:0 0 8px;font-size:2rem;letter-spacing:.02em}.hero p{margin:0;color:#bbdefb}
+    .notice{margin:22px 0;padding:18px 22px;border:1px solid #ef9a9a;border-radius:12px;background:var(--pale-red)}
+    h2{margin:42px 0 18px;padding:10px 16px;background:var(--navy);color:#fff;border-radius:8px;border-left:7px solid var(--orange);font-size:1.25rem}
+    h3{margin:28px 0 12px;padding:8px 14px;background:#f0f4ff;color:var(--navy);border-left:6px solid var(--blue);font-size:1.08rem}
+    table{width:100%;border-collapse:collapse;margin:14px 0 22px}
+    th{background:var(--blue);color:#fff;padding:10px 12px;border:1px solid #90caf9;text-align:left}
+    td{padding:10px 12px;border:1px solid #cfd8dc;vertical-align:top}
+    tbody tr:nth-child(even){background:#f8fbff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fff}
+    .blue{background:var(--pale-blue);border-color:#64b5f6}.red{background:var(--pale-red);border-color:#ef9a9a}
+    .green{background:var(--pale-green);border-color:#81c784}.yellow{background:var(--pale-yellow);border-color:#ffd54f}
+    .gray{background:var(--pale-gray)}
+    .swatch{display:inline-block;width:1.1em;height:1.1em;border-radius:3px;vertical-align:-.15em;margin-right:.4em;border:1px solid rgba(0,0,0,.15)}
+    figure{margin:26px 0 44px;padding:16px;border:1px solid #d5d8e0;border-radius:14px;background:#fafbfe}
+    figure img{display:block;width:100%;height:auto;border:1px solid #e0e0e0;background:white}
+    figcaption{margin-top:12px;color:#555;font-size:.95rem}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+    pre{white-space:pre-wrap;background:#f5f5f5;border:1px solid #ddd;border-radius:10px;padding:16px;overflow:auto}
+    .marker{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#fff3e0;border:1px solid #ffcc80;border-radius:8px;padding:12px 14px}
+    footer{margin-top:50px;padding-top:18px;border-top:1px solid #ddd;color:#666;font-size:.9rem}
+    @media(max-width:600px){main{padding:16px 12px 50px}.hero{padding:28px 22px}.hero h1{font-size:1.55rem}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <h1>A4教材PDFテンプレート</h1>
+    <p>Markdownから視覚的に整理されたA4縦PDFを生成するためのデザイン仕様</p>
+  </header>
+
+  <div class="notice">
+    <strong>重要：</strong>このページは完成PDFの<strong>視覚デザインだけ</strong>を指定する参考資料です。
+    下の見本文・仮データ・識別子を生成物へコピーせず、PDF本文にはユーザーが添付したMarkdownの内容だけを使用してください。
+  </div>
+
+  <h2>1. 用紙・余白・ページ密度</h2>
+  <table>
+    <thead><tr><th>項目</th><th>固定仕様</th></tr></thead>
+    <tbody>
+      <tr><td>用紙</td><td>A4縦（210 × 297mm）</td></tr>
+      <tr><td>余白</td><td>上15mm、下17mm、左18mm、右16mm</td></tr>
+      <tr><td>主要ブロック数</td><td>1ページあたり原則3～6個</td></tr>
+      <tr><td>文字量の目安</td><td>図表あり：300～650字／文章中心：500～850字</td></tr>
+      <tr><td>改ページ</td><td>見出しだけをページ末に残さない。短い続きだけの最終ページを作らない。1ページへ無理に押し込まない。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. 配色</h2>
+  <div class="grid">
+    <div class="card"><span class="swatch" style="background:#1A237E"></span>濃紺 <code>#1A237E</code><br>主要見出し・強い階層</div>
+    <div class="card"><span class="swatch" style="background:#1565C0"></span>青 <code>#1565C0</code><br>表見出し・説明・矢印</div>
+    <div class="card"><span class="swatch" style="background:#FF6F00"></span>橙 <code>#FF6F00</code><br>主要見出しのアクセント</div>
+    <div class="card"><span class="swatch" style="background:#C0392B"></span>赤 <code>#C0392B</code><br>重要結論・注意・対立</div>
+    <div class="card"><span class="swatch" style="background:#2E7D32"></span>緑 <code>#2E7D32</code><br>肯定・まとめ</div>
+    <div class="card"><span class="swatch" style="background:#6A1B9A"></span>紫 <code>#6A1B9A</code><br>別系統の論点・関係図</div>
+  </div>
+  <h3>淡色の意味づけ</h3>
+  <div class="grid">
+    <div class="card blue"><strong>淡青 #E3F2FD</strong><br>定義・説明</div>
+    <div class="card red"><strong>淡赤 #FDECEA</strong><br>重要結論・注意</div>
+    <div class="card green"><strong>淡緑 #E8F5E9</strong><br>肯定・まとめ</div>
+    <div class="card yellow"><strong>淡黄 #FFF8E1</strong><br>例・検討</div>
+    <div class="card gray"><strong>淡灰 #F5F5F5</strong><br>補足・周辺情報</div>
+  </div>
+
+  <h2>3. 見出し・本文・表・囲み枠</h2>
+  <ul>
+    <li><strong>章扉：</strong>1ページ目上部に高さ45～52mmの濃紺ブロック。白の題名24～26pt、淡青の副題12pt、下端に橙4ptの線。</li>
+    <li><strong>主要見出し：</strong>濃紺の横長角丸バー。左端に橙4ptの縦アクセント。白文字12～13pt。</li>
+    <li><strong>下位見出し：</strong>淡青の帯。左端に青・赤・緑・紫の縦線。濃紺文字11～11.5pt。</li>
+    <li><strong>本文：</strong>濃い灰色 <code>#2C2C2C</code>、10.5～11pt、行送り16.5～18pt。Thin系フォントを使わない。</li>
+    <li><strong>表：</strong>ヘッダーは青背景＋白文字。本文は白と淡色を使い、0.5～1ptの罫線、十分なセル余白、自然な折り返し。</li>
+    <li><strong>囲み枠：</strong>情報の意味に応じて淡青・淡赤・淡緑・淡黄・淡灰を使い分け、角丸と内側余白を付ける。</li>
+  </ul>
+
+  <h2>4. 図の変換規則</h2>
+  <table>
+    <thead><tr><th>Markdown上の構造</th><th>PDFでの表現</th></tr></thead>
+    <tbody>
+      <tr><td><code>A → B → C</code>、縦矢印、論証、手順</td><td>横長の角丸矩形を縦に並べ、青い矢印で接続するフローチャート</td></tr>
+      <tr><td><code>A vs B</code>、<code>A＜B</code>、肯定／否定</td><td>左右比較表、または中央記号付き比較図</td></tr>
+      <tr><td>人物・概念が3項目以上</td><td>比較表、系譜図、人物・概念関係図</td></tr>
+      <tr><td>定義、結論、注意、例</td><td>意味に対応する色の角丸情報枠</td></tr>
+      <tr><td>コードブロック</td><td>等幅フォント＋淡灰背景のコード枠。コード内容は変更しない</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. レイアウト見本（全6ページ）</h2>
+  <p>画像は視覚構成の参考です。画像内の見本文を出力へコピーしないでください。</p>
+
+  <figure id="slide-1">
+    <img src="images/slide-1.png" alt="章扉と導入ページの見本。濃紺の章扉、橙の下線、主要見出し、説明枠を配置。">
+    <figcaption><strong>1ページ目：</strong>章扉＋導入。大きな濃紺ブロック、橙アクセント、導入用の情報枠。</figcaption>
+  </figure>
+  <figure id="slide-2">
+    <img src="images/slide-2.png" alt="論証と因果関係のフローチャート見本。横長の矩形を縦に並べ矢印で接続。">
+    <figcaption><strong>2ページ目：</strong>論証・因果関係。複数段のフローチャートと結論枠。</figcaption>
+  </figure>
+  <figure id="slide-3">
+    <img src="images/slide-3.png" alt="左右比較ページの見本。二つの立場を色分けした表と比較枠。">
+    <figcaption><strong>3ページ目：</strong>左右比較。二つの立場・概念・条件を対照させる。</figcaption>
+  </figure>
+  <figure id="slide-4">
+    <img src="images/slide-4.png" alt="人物・概念関係図の見本。複数の箱を線と矢印で結び、系譜や関係を示す。">
+    <figcaption><strong>4ページ目：</strong>人物・概念関係図。箱、矢印、線、補足枠を組み合わせる。</figcaption>
+  </figure>
+  <figure id="slide-5">
+    <img src="images/slide-5.png" alt="手順・技術文書ページの見本。前提条件、番号付き手順、コード枠、注意枠を配置。">
+    <figcaption><strong>5ページ目：</strong>手順・技術文書。前提条件、手順、コード、注意、完了条件を分離する。</figcaption>
+  </figure>
+  <figure id="slide-6">
+    <img src="images/slide-6.png" alt="まとめ・確認事項ページの見本。要点表、確認項目、結論枠を配置。">
+    <figcaption><strong>6ページ目：</strong>まとめ・確認事項。要点表、チェック項目、最終結論を整理する。</figcaption>
+  </figure>
+
+  <h2>6. 生成時の禁止事項</h2>
+  <ul>
+    <li>原稿を要約して情報を削除しない。</li>
+    <li>白紙に本文だけを流し込んだPDFを完成品としない。</li>
+    <li>固定座標へ高さ計算なしで文字や図形を置かない。</li>
+    <li>空表、空図形、未入力プレースホルダーを残さない。</li>
+    <li>見本文・仮データ・このページの識別子を生成PDFへ含めない。</li>
+    <li>本文を10pt未満へ縮小して1ページに押し込まない。</li>
+  </ul>
+
+  <h2>7. 参照確認用識別子</h2>
+  <p>エージェントがこの公開ページを実際に参照できたかを確認するための文字列です。完成PDFには含めないでください。</p>
+  <div class="marker">A4TPL-PUBLIC-WEB-6P-7C29</div>
+  <p>ページ数確認値：<strong>6</strong><br>第5レイアウト名：<strong>手順・技術文書</strong><br>第6レイアウト名：<strong>まとめ・確認事項</strong></p>
+
+  <footer>
+    視覚仕様専用ページ。入力Markdownの内容が常に最優先であり、このページはデザインと組版にのみ使用する。
+  </footer>
+</main>
+</body>
+</html>
